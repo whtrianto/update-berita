@@ -101,7 +101,7 @@
         <div class="container-glass">
             <nav>
                 <ul>
-                    <li><span class="brand">CMS Admin</span></li>
+                    <li><a href="{{ route('home') }}"><span class="brand">Beranda</span></a></li>
                 </ul>
                 <ul>
                     <li><a href="{{ route('posts.index') }}">Posts</a></li>

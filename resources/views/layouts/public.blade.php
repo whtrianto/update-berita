@@ -349,7 +349,7 @@
             <nav>
                 <ul>
                     <li><a href="{{ route('home') }}">Beranda</a></li>
-                    <li><a href="{{ url('/categories') }}">Kategori</a></li>
+                    <li><a href="{{ url('/posts') }}">Posts</a></li>
                     @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
                     @else
