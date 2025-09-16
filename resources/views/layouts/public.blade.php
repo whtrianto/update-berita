@@ -350,6 +350,16 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Beranda</a></li>
                     <li><a href="{{ url('/categories') }}">Kategori</a></li>
+                    @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    @else
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="contrast" style="margin:0">Logout</button>
+                        </form>
+                    </li>
+                    @endguest
                 </ul>
             </nav>
         </div>

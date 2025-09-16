@@ -107,6 +107,22 @@
                     <li><a href="{{ route('posts.index') }}">Posts</a></li>
                     <li><a href="{{ route('categories.index') }}">Categories</a></li>
                     <li><a href="{{ route('tags.index') }}">Tags</a></li>
+                    <li><a href="{{ route('users.index') }}">Users</a></li>
+                    @auth
+                    <li>
+                        <details role="list">
+                            <summary aria-haspopup="listbox">{{ auth()->user()->name }}</summary>
+                            <ul role="listbox">
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                    @endauth
                 </ul>
             </nav>
         </div>

@@ -5,13 +5,23 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminUserController;
 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 
-// Admin resources (simple, no auth middleware yet)
-Route::resource('posts', PostController::class)->except(['show']);
-Route::resource('categories', CategoryController::class)->except(['show']);
-Route::resource('tags', TagController::class)->except(['show']);
+// Auth routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->name('login.attempt')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Admin resources (protected)
+Route::middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class)->except(['show']);
+    Route::resource('categories', CategoryController::class)->except(['show']);
+    Route::resource('tags', TagController::class)->except(['show']);
+    Route::resource('users', AdminUserController::class)->except(['show']);
+});
 
 // Public routes
 Route::get('/p/{slug}', [PublicController::class, 'post'])->name('public.post');
